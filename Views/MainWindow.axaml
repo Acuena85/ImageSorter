@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ImageSorter.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:ImageSorter.ViewModels"
+        mc:Ignorable="d"
+        Width="500"
+        Height="270"
+        MinWidth="500"
+        MinHeight="270"
+        MaxHeight="270"
+        x:Class="ImageSorter.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ImageSorter">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <!-- Main Grid -->
+    <Grid
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+        Margin="4"
+        Name="GrMain">
+
+        <!-- Grid path -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,40">
+            <TextBlock Grid.Column="0" Margin="0,5,10,0" Text="Path:" />
+            <TextBox Grid.Column="1" Watermark="Path to the folder!" />
+            <Button Grid.Column="2" Command="{Binding SelectFolder}" Content="..." Margin="2,0,2,0" />
+        </Grid>
+
+        <!-- Grid method -->
+        <Grid
+            Margin="0,5,0,0"
+            Grid.Row="1"
+            ColumnDefinitions="50,*,40">
+            <StackPanel
+                Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="Method:" />
+                <RadioButton Margin="5,-7,0,0" IsChecked="true" Content="Move" GroupName="MoveCopy" />
+                <RadioButton Margin="5,-7,0,0" IsChecked="false" Content="Copy" GroupName="MoveCopy" />
+            </StackPanel>
+        </Grid>
+
+
+        <!-- Option in how to name folders -->
+        <Grid
+            Grid.Row="2" ColumnDefinitions="*">
+            <TextBlock Grid.Column="0" Text="Name folder:" />
+        </Grid>
+
+        <Grid
+            Grid.Row="3" ColumnDefinitions="50,*,40">
+            <TextBox Grid.Column="1" Watermark="Default: Year-Month-Day - time" />
+        </Grid>
+
+        <!-- Option in how to name files -->
+        <Grid
+            Grid.Row="4" ColumnDefinitions="*">
+            <TextBlock Grid.Column="0" Text="Name files:" />
+        </Grid>
+
+        <Grid
+            Grid.Row="5" ColumnDefinitions="50,*,40">
+            <TextBox Grid.Column="1" Watermark="Leave blank to keep file names" />
+        </Grid>
+
+        <!-- Show report when done -->
+        <Grid
+            Grid.Row="6"
+            ColumnDefinitions="50,*,40">
+            <CheckBox HorizontalAlignment="Right" Content="Show report when done" Grid.Column="1"></CheckBox>
+        </Grid>
+
+        <Grid
+            Grid.Row="7"
+            HorizontalAlignment="Right"
+            ColumnDefinitions="50,*,40">
+            <Button Grid.Column="1" Content="Sort images" Command="{Binding TestButton}" />
+        </Grid>
+
+        <!-- Indexing files status -->
+        <Grid
+            Grid.Row="8">
+            <Grid
+                ColumnDefinitions="50,*,40"
+                >
+                <TextBlock Grid.Column="1" IsVisible="{Binding ShowIndexingInfo}" Text="{Binding TextInfo}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
